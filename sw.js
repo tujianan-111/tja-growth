@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tja-growth-v3';
+const CACHE_NAME = 'tja-growth-v4';
 const APP_SHELL = [
   './',
   './index.html',
