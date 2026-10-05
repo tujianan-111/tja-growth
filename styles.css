@@ -17,6 +17,7 @@
   --hero-card: #232321;
   --hero-text: #fbfaf6;
   --hero-muted: #b9b9b0;
+  --title-gradient: linear-gradient(105deg, #2d2d2a 0%, #6d6d66 50%, #b2b1a8 100%);
   --shadow-sm: 0 1px 2px rgb(28 28 24 / 5%), 0 8px 24px rgb(28 28 24 / 5%);
   --shadow-lg: 0 24px 70px rgb(28 28 24 / 18%);
   --radius-sm: 12px;
@@ -44,6 +45,7 @@ html[data-theme="dark"] {
   --hero-card: #292927;
   --hero-text: #fbfaf6;
   --hero-muted: #bbb9b0;
+  --title-gradient: linear-gradient(105deg, #faf9f4 0%, #bdbcb4 48%, #6f6f69 100%);
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 18%), 0 10px 30px rgb(0 0 0 / 15%);
   --shadow-lg: 0 24px 80px rgb(0 0 0 / 42%);
 }
@@ -68,6 +70,7 @@ html[data-theme="dark"] {
     --hero-card: #292927;
     --hero-text: #fbfaf6;
     --hero-muted: #bbb9b0;
+    --title-gradient: linear-gradient(105deg, #faf9f4 0%, #bdbcb4 48%, #6f6f69 100%);
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 18%), 0 10px 30px rgb(0 0 0 / 15%);
     --shadow-lg: 0 24px 80px rgb(0 0 0 / 42%);
   }
@@ -222,12 +225,18 @@ svg {
 }
 
 .hero h1 {
+  width: fit-content;
   max-width: 680px;
   margin-top: 9px;
   font-size: clamp(2.25rem, 10vw, 4.2rem);
   font-weight: 850;
   letter-spacing: -0.075em;
   word-break: keep-all;
+  background: var(--title-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .today-date {
