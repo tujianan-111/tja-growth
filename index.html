@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Tja的成长之路：简洁、专注的每日习惯打卡工具。">
+  <meta name="theme-color" content="#f5f4ef" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181817" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="成长之路">
+  <title>Tja的成长之路</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon-180.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
+  <div class="ambient-shape ambient-shape-one" aria-hidden="true"></div>
+  <div class="ambient-shape ambient-shape-two" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">每日一点，持续成长</p>
+        <h1>Tja的成长之路</h1>
+        <p class="today-date" id="todayDate"></p>
+      </div>
+      <button class="icon-button settings-button" id="settingsButton" type="button" aria-label="打开设置">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 15.25A3.25 3.25 0 1 0 12 8.75a3.25 3.25 0 0 0 0 6.5Z"/>
+          <path d="M19.14 13.27c.05-.42.05-.84 0-1.26l1.56-1.2-1.82-3.15-1.86.73a7.43 7.43 0 0 0-1.09-.63L15.7 5h-3.64l-.23 1.99c-.39.17-.75.38-1.08.63L8.9 6.9 7.08 10.05l1.55 1.2a7 7 0 0 0 0 1.27l-1.55 1.2 1.82 3.15 1.86-.74c.34.25.7.46 1.08.63l.23 1.99h3.64l.23-1.99c.39-.17.75-.38 1.09-.63l1.86.74 1.82-3.15-1.57-1.45Z"/>
+        </svg>
+      </button>
+    </header>
+
+    <main id="mainContent">
+      <section class="summary-card" aria-labelledby="summaryTitle">
+        <div class="summary-top">
+          <div>
+            <p class="summary-label" id="summaryTitle">今日完成</p>
+            <p class="summary-count">
+              <strong id="completedCount">0</strong>
+              <span class="summary-divider">/</span>
+              <span id="dueCount">0</span>
+            </p>
+          </div>
+          <div class="streak-chip" aria-label="连续全勤天数">
+            <span>连续全勤</span>
+            <strong id="streakCount">0 天</strong>
+          </div>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="今日完成进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p class="summary-message" id="summaryMessage">从今天的第一件小事开始。</p>
+      </section>
+
+      <nav class="view-tabs" aria-label="页面视图">
+        <button class="view-tab is-active" type="button" data-view="today" aria-current="page">今日</button>
+        <button class="view-tab" type="button" data-view="history">月历</button>
+      </nav>
+
+      <section class="view-panel" id="todayView" aria-labelledby="todayHeading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">TODAY</p>
+            <h2 id="todayHeading">今天要坚持的事</h2>
+          </div>
+          <button class="primary-button compact-button" id="addHabitButton" type="button">
+            <span aria-hidden="true">＋</span>
+            添加习惯
+          </button>
+        </div>
+        <div class="habit-list" id="habitList"></div>
+        <section class="off-schedule-section" id="offScheduleSection" hidden aria-labelledby="offScheduleHeading">
+          <div class="subsection-heading">
+            <h3 id="offScheduleHeading">今日无需打卡</h3>
+            <span id="offScheduleCount"></span>
+          </div>
+          <div class="habit-list habit-list-muted" id="offScheduleList"></div>
+        </section>
+      </section>
+
+      <section class="view-panel" id="historyView" hidden aria-labelledby="historyHeading">
+        <div class="section-heading history-heading">
+          <div>
+            <p class="section-kicker">HISTORY</p>
+            <h2 id="historyHeading">成长月历</h2>
+          </div>
+          <div class="month-navigation" aria-label="月份切换">
+            <button class="icon-button small-icon-button" id="previousMonthButton" type="button" aria-label="上一个月">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>
+            </button>
+            <strong id="monthTitle"></strong>
+            <button class="icon-button small-icon-button" id="nextMonthButton" type="button" aria-label="下一个月">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="month-summary-grid">
+          <div class="mini-stat">
+            <span>本月完成</span>
+            <strong id="monthCompletion"></strong>
+          </div>
+          <div class="mini-stat">
+            <span>当前连续全勤</span>
+            <strong id="monthStreak"></strong>
+          </div>
+        </div>
+
+        <div class="calendar-card">
+          <div class="calendar-weekdays" aria-hidden="true">
+            <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <div class="calendar-legend" aria-label="日历图例">
+            <span><i class="legend-dot complete"></i>全部完成</span>
+            <span><i class="legend-dot partial"></i>部分完成</span>
+            <span><i class="legend-dot none"></i>未完成 / 无安排</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      数据仅保存在当前浏览器。建议定期在设置中导出备份。
+    </footer>
+  </div>
+
+  <dialog class="sheet-dialog" id="habitDialog" aria-labelledby="habitDialogTitle">
+    <form id="habitForm" novalidate>
+      <div class="dialog-header">
+        <div>
+          <p class="section-kicker" id="habitDialogKicker">NEW HABIT</p>
+          <h2 id="habitDialogTitle">添加习惯</h2>
+        </div>
+        <button class="icon-button dialog-close" type="button" data-close-dialog="habitDialog" aria-label="关闭">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <input id="habitIdInput" type="hidden">
+      <div class="form-grid">
+        <label class="field-group emoji-field">
+          <span>表情</span>
+          <input id="habitEmojiInput" type="text" maxlength="4" inputmode="text" autocomplete="off" placeholder="•" aria-describedby="emojiHint">
+        </label>
+        <label class="field-group name-field">
+          <span>习惯名称</span>
+          <input id="habitNameInput" type="text" maxlength="30" required autocomplete="off" placeholder="例如：喝水、健身">
+        </label>
+      </div>
+      <p class="field-hint" id="emojiHint">可选，最多两个字符。</p>
+
+      <fieldset class="weekday-fieldset">
+        <legend>每周安排</legend>
+        <p class="field-hint">只有被选中的星期才会计入完成进度。</p>
+        <div class="weekday-options" id="weekdayOptions"></div>
+      </fieldset>
+
+      <p class="form-error" id="habitFormError" role="alert"></p>
+      <div class="dialog-actions">
+        <button class="secondary-button" type="button" data-close-dialog="habitDialog">取消</button>
+        <button class="primary-button" type="submit">保存习惯</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="sheet-dialog day-dialog" id="dayDialog" aria-labelledby="dayDialogTitle">
+    <div class="dialog-header">
+      <div>
+        <p class="section-kicker">DAY DETAIL</p>
+        <h2 id="dayDialogTitle"></h2>
+      </div>
+      <button class="icon-button dialog-close" type="button" data-close-dialog="dayDialog" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <p class="dialog-description" id="dayDialogDescription"></p>
+    <div class="day-detail-list" id="dayDetailList"></div>
+  </dialog>
+
+  <dialog class="sheet-dialog settings-dialog" id="settingsDialog" aria-labelledby="settingsDialogTitle">
+    <div class="dialog-header">
+      <div>
+        <p class="section-kicker">SETTINGS</p>
+        <h2 id="settingsDialogTitle">设置</h2>
+      </div>
+      <button class="icon-button dialog-close" type="button" data-close-dialog="settingsDialog" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <section class="settings-section">
+      <h3>外观</h3>
+      <label class="select-field">
+        <span>主题</span>
+        <select id="themeSelect">
+          <option value="system">跟随系统</option>
+          <option value="light">浅色</option>
+          <option value="dark">深色</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="settings-section">
+      <div class="settings-heading-row">
+        <div>
+          <h3>备份与恢复</h3>
+          <p>导入会替换当前浏览器中的全部数据。</p>
+        </div>
+      </div>
+      <div class="settings-actions">
+        <button class="secondary-button" id="exportButton" type="button">导出 JSON</button>
+        <label class="secondary-button file-button" for="importInput">导入 JSON</label>
+        <input class="visually-hidden" id="importInput" type="file" accept="application/json,.json">
+      </div>
+      <p class="storage-summary" id="storageSummary"></p>
+    </section>
+
+    <section class="settings-section archive-section">
+      <h3>已归档的习惯</h3>
+      <p>历史记录会保留；恢复后可继续打卡，永久删除会同时清除历史。</p>
+      <div class="archive-list" id="archiveList"></div>
+    </section>
+  </dialog>
+
+  <dialog class="confirm-dialog" id="confirmDialog" aria-labelledby="confirmDialogTitle">
+    <div class="confirm-symbol" id="confirmSymbol" aria-hidden="true">?</div>
+    <h2 id="confirmDialogTitle">确认操作</h2>
+    <p id="confirmDialogMessage"></p>
+    <div class="dialog-actions">
+      <button class="secondary-button" id="confirmCancelButton" type="button">取消</button>
+      <button class="danger-button" id="confirmAcceptButton" type="button">确认</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

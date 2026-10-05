@@ -1,0 +1,28 @@
+{
+  "name": "Tja的成长之路",
+  "short_name": "成长之路",
+  "description": "简洁、专注的每日习惯打卡工具。",
+  "lang": "zh-CN",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f4ef",
+  "theme_color": "#f5f4ef",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
